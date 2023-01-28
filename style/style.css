@@ -1,7 +1,7 @@
 /* start global rules */
 :root {
-  --main-color: #2196f3;
-  --main-color-hover: #008cff;
+  --main-color: #2183d3;
+  --main-color-hover: #2da0ff;
   --transition-time: 0.3s;
 }
 * {
@@ -53,69 +53,253 @@ header {
   position: relative;
 }
 header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  position: relative;
 }
 header .logo {
-    padding: 30px;
-    font-size: 1.3rem;
-    color: var(--main-color);
-    font-weight: bold;
-    text-transform: uppercase;
-    height: 76px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  padding: 30px;
+  font-size: 1.3rem;
+  color: var(--main-color);
+  font-weight: bold;
+  text-transform: uppercase;
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-time);
+}
+header .logo:hover {
+  color: var(--main-color-hover);
 }
 header .main-nav {
-    display: flex;
+  display: flex;
 }
-header .main-nav > li > a{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    height: 76px;
-    color: black;
-    padding: 0 30px;
-    overflow: hidden;
-    transition:var(--transition-time);
+header .main-nav > li > a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 76px;
+  color: black;
+  padding: 0 30px;
+  overflow: hidden;
+  transition: var(--transition-time);
 }
-@media (max-width:767px) {
-    header .logo{
-        width: 100%;
-        height: 50px;
-    }
-    header .main-nav{
-        margin: auto;
-    }
-    header .main-nav > li > a{
-        padding: 10px;
-        height: 50px;
-    }
+header .main-nav > li:hover .mega-menu {
+  opacity: 1;
+  z-index: 999;
+  top: calc(100% + 1px);
 }
-header .main-nav > li > a::before{
-    content: '';
-    position: absolute;
-    /* width: 100%; */
-    width: 0;
-    height: 3px;
-    background-color: var(--main-color);
-    top: 0;
-    /* left: -100%; */
-    left: 50%;
-    transform: translateX(-50%);
-    transition:var(--transition-time);
-}
-header .main-nav > li > a:hover{
-    color: var(--main-color-hover);
-    background-color: #f7f7f7;
-}
-header .main-nav > li > a:hover::before{
-    /* left: 0px; */
+@media (max-width: 767px) {
+  header .logo {
     width: 100%;
+    height: 50px;
+  }
+  header .main-nav {
+    margin: auto;
+  }
+  header .main-nav > li > a {
+    padding: 10px;
+    height: 50px;
+  }
+}
+header .main-nav > li > a::before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 3px;
+  background-color: var(--main-color);
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: var(--transition-time);
+}
+header .main-nav > li > a:hover {
+  color: var(--main-color-hover);
+  background-color: #f7f7f7;
+}
+header .main-nav > li > a:hover::before {
+  /* left: 0px; */
+  width: 100%;
+}
+header .mega-menu {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  padding: 20px;
+  border-bottom: 3px solid var(--main-color);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 50px;
+  top: calc(100% + 50px);
+  transition: var(--transition-time);
+}
+header .mega-menu .image {
+  max-width: 100%;
+  flex-basis: 35%;
+}
+@media (max-width: 991px) {
+  header .mega-menu .image {
+    display: none;
+  }
+}
+header .mega-menu .image img {
+  max-width: 100%;
+}
+header .mega-menu .links {
+  min-width: 250px;
+  flex: 1;
+}
+header .mega-menu .links li {
+  font-size: 1.1rem;
+  position: relative;
+}
+header .mega-menu .links li:not(:last-child) {
+  border-bottom: 2px solid #aaa;
+}
+header .mega-menu .links li a {
+  display: block;
+  padding: 15px;
+  margin: 10px 15px;
+  color: var(--main-color);
+  transition: var(--transition-time);
+}
+header .mega-menu .links li a:hover {
+  color: var(--main-color-hover);
+}
+header .mega-menu .links li a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 0;
+  width: 100%;
+  background-color: #f1f1f1;
+  z-index: -1;
+  transition: var(--transition-time);
+}
+header .mega-menu .links li a:hover::before {
+  height: 100%;
+}
+@media (max-width: 767px) {
+  header .mega-menu {
+    gap: 0;
+    padding: 5px;
+  }
+  header .mega-menu .links:first-of-type li:last-child {
+    border-bottom: 2px solid #aaa;
+  }
+  header .mega-menu .links li a {
+    margin: 5px;
+    padding: 5px;
+  }
+}
+header .mega-menu .links li a i {
+  padding: 0 20px;
 }
 /* end header */
+
+/* start landing */
+.landing {
+  position: relative;
+}
+.landing::before {
+  content: "";
+  position: absolute;
+  top: -30px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ddd;
+  z-index: -1;
+  transform: skew(0deg, -7deg);
+  transform-origin: top left;
+}
+.landing .container {
+  min-height: calc(100vh - 79px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding-bottom: 100px;
+}
+@media (max-width: 767px) {
+  .landing .container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+}
+.landing .image {
+  flex-basis: 50%;
+  width: 100%;
+}
+.landing .image img {
+  max-width: 100%;
+  /* position: relative; */
+  animation: up-and-down 5s linear infinite;
+}
+.landing .text {
+  flex-basis: 50%;
+  /* flex: 1; */
+}
+.landing .text h1 {
+  font-size: 2rem;
+  margin: 0;
+  letter-spacing: -2px;
+}
+.landing .text p {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: #444;
+  max-width: 500px;
+}
+.landing > a {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--main-color);
+  transition: var(--transition-time);
+  animation: arrow-up-down 1s linear infinite;
+}
+.landing > a:hover {
+  color: var(--main-color-hover);
+}
+/* end landing */
+
+/* start animation */
+@keyframes up-and-down {
+  0%,
+  100% {
+    transform: translateY(-20px);
+    /* top: 0; */
+  }
+  50% {
+    transform: translateY(30px);
+    /* top: -50px; */
+  }
+}
+@keyframes arrow-up-down {
+  0%,
+  30%,
+  50%,
+  70%,
+  100% {
+    transform: translateY(0px);
+  }
+  40%,
+  60% {
+    transform: translateY(20px);
+  }
+}
+/* end animation */
