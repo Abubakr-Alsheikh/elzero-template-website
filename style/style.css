@@ -2,7 +2,9 @@
 :root {
   --main-color: #2183d3;
   --main-color-hover: #2da0ff;
+  --background-color:#f2f2f2;
   --transition-time: 0.3s;
+  --main-padding:100px
 }
 * {
   -moz-box-sizing: border-box;
@@ -45,6 +47,48 @@ ul {
   }
 }
 /* end global rules */
+
+/* start component */
+.main-title {
+  margin: 0 auto 80px;
+  padding: 15px 30px;
+  width: -moz-fit-content;
+  width: fit-content;
+  border: 1px solid #000;
+  font-size: 3rem;
+  position: relative;
+}
+.main-title::after,
+.main-title::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: var(--main-color);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+.main-title::after {
+  left: -40px;
+}
+.main-title::before {
+  right: -40px;
+}
+.main-title:hover::after {
+  z-index: -1;
+  animation: left-move 0.3s linear forwards;
+}
+.main-title:hover::before {
+  z-index: -1;
+  animation: right-move 0.3s linear forwards;
+}
+.main-title:hover {
+  color: white;
+  border-color: white;
+  transition-delay: 0.3s;
+}
+/* end component */
 
 /* start header */
 header {
@@ -218,7 +262,7 @@ header .mega-menu .links li a i {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #ddd;
+  background-color: var(--background-color);
   z-index: -1;
   transform: skew(0deg, -7deg);
   transform-origin: top left;
@@ -277,6 +321,117 @@ header .mega-menu .links li a i {
 }
 /* end landing */
 
+/* start articles */
+.articles {
+  padding-top: var(--main-padding);
+  padding-bottom: var(--main-padding);
+}
+.articles .container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(250px,1fr));
+  gap: 40px;
+}
+.articles .box {
+  box-shadow: 0 2px 15px rgb(0, 0, 0,0.2);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: all var(--transition-time);
+}
+.articles .box:hover{
+  box-shadow: 0 2px 15px rgb(0, 0, 0,0.4);
+  transform: translateY(-10px);
+}
+.articles .box img {
+  width: 100%;
+  max-width: 100%;
+}
+.articles .text {
+  padding: 20px;
+}
+.articles .text h3 {
+  margin: 0;
+}
+.articles .text p {
+  margin: 10px 0 0;
+  line-height: 1.5;
+  color: #333;
+}
+.articles .info {
+  padding: 20px;
+  border-top: 1px solid #aaa;
+  display: flex;
+  justify-content: space-between;
+}
+.articles .info a {
+  color: var(--main-color);
+  font-weight: bold;
+}
+.articles .info i {
+  color: var(--main-color);
+  /* animation: arrow-to-left 0.3s linear infinite; */
+}
+.articles .box:hover .info i {
+  color: var(--main-color-hover);
+  animation: arrow-to-left 0.3s linear infinite;
+}
+/* end articles */
+
+/* start gallary */
+.gallary{
+  position: relative;
+  z-index: 1;
+  background-color: var(--background-color);
+  padding-top: var(--main-padding);
+  padding-bottom: var(--main-padding);
+}
+.gallary .container{
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
+  gap: 40px;
+}
+.gallary .box{
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 0 15px rgb(0, 0, 0,0.2);
+}
+.gallary .box .image{
+  position: relative;
+  overflow: hidden;
+
+}
+.gallary .box .image::before{
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  background-color: rgb(255, 255, 255,0.3);
+  width: 0;
+  height: 0;
+  opacity: 0;
+  z-index: 2;
+}
+.gallary .image:hover:before{
+  animation: flash-light 1s;
+}
+.gallary .image img{
+  max-width: 100%;
+  transition: var(--transition-time);
+  width: 100%;
+  height: 100%;
+}
+.gallary .image:hover img{
+  transform: rotate(3deg) scale(1.1);
+}
+/* end gallary */
+
+/* start features */
+.features{
+  padding-top: var(--main-padding);
+  padding-bottom: var(--main-padding);
+}
+/* end features */
+
 /* start animation */
 @keyframes up-and-down {
   0%,
@@ -300,6 +455,50 @@ header .mega-menu .links li a i {
   40%,
   60% {
     transform: translateY(20px);
+  }
+}
+@keyframes left-move {
+  50% {
+    left: 0;
+    width: 20px;
+    height: 20px;
+  }
+  100% {
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0px;
+  }
+}
+@keyframes right-move {
+  50% {
+    right: 0;
+    width: 20px;
+    height: 20px;
+  }
+  100% {
+    right: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0px;
+  }
+}
+@keyframes arrow-to-left {
+  0%,100%{
+    transform: translateX(0);
+  }
+  50%{
+    transform: translateX(10px);
+  }
+}
+@keyframes flash-light {
+  0%,20%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+    width: 200%;
+    height: 200%;
   }
 }
 /* end animation */
